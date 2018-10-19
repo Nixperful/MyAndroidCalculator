@@ -107,7 +107,9 @@ public class CalculatorView extends AppCompatActivity {
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                okAction();
+                if((mainPanel.getEditableText()+"").length()>0) {
+                    okAction();
+                }
             }
         });
 
@@ -188,7 +190,7 @@ public class CalculatorView extends AppCompatActivity {
                     mainPanel.setText((mainPanel.getEditableText()+"").substring(1,mainPanel.getEditableText().length()));
                 }
                 else{
-                    mainPanel.setText("-"+mainPanel.getEditableText()+" ");
+                    mainPanel.setText("-"+mainPanel.getEditableText()+"");
                 }
 
             }
