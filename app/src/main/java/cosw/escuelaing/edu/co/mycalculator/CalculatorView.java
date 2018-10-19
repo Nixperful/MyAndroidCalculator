@@ -160,6 +160,41 @@ public class CalculatorView extends AppCompatActivity {
             }
         });
 
+        buttonSin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coreCalc.sinFunction();
+                self.refreshPanel();
+            }
+        });
+        buttonCos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coreCalc.cosFunction();
+                self.refreshPanel();
+            }
+        });
+        buttonTan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coreCalc.tanFunction();
+                self.refreshPanel();
+            }
+        });
+        buttonSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((mainPanel.getEditableText()+"").startsWith("-")){
+                    mainPanel.setText((mainPanel.getEditableText()+"").substring(1,mainPanel.getEditableText().length()));
+                }
+                else{
+                    mainPanel.setText("-"+mainPanel.getEditableText()+" ");
+                }
+
+            }
+        });
+
+
     }
 
 

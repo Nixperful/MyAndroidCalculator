@@ -57,6 +57,27 @@ public class CalculatorCore {
         }
     }
 
+    void sinFunction(){
+        if(stack.size()>=1) {
+            float val = optr.sen(stack.get(stack.size() - 1));
+            operationCompleted(val);
+        }
+    }
+
+    void cosFunction(){
+        if(stack.size()>=1) {
+            float val = optr.cos(stack.get(stack.size() - 1));
+            operationCompleted(val);
+        }
+    }
+
+    void tanFunction(){
+        if(stack.size()>=1) {
+            float val = optr.tan(stack.get(stack.size() - 1));
+            operationCompleted(val);
+        }
+    }
+
     void operationCompleted(float val){
 
         stack.remove(stack.size()-1);
