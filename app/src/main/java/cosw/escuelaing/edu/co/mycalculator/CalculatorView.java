@@ -1,0 +1,248 @@
+package cosw.escuelaing.edu.co.mycalculator;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class CalculatorView extends AppCompatActivity {
+    Button button00;
+    Button button0;
+    Button button1;
+    Button button2;
+    Button button3;
+    Button button4;
+    Button button5;
+    Button button6;
+    Button button7;
+    Button button8;
+    Button button9;
+    Button buttonPoint;
+
+    Button buttonEquals,buttonDel;
+    Button buttonOK,buttonAc;
+    Button buttonAdd,buttonSubt;
+    Button buttonMult;
+    Button buttonDiv;
+    Button buttonSign;
+    Button buttonSin, buttonCos, buttonTan;
+    Button buttonSqrt, buttonPow;
+
+
+    EditText mainPanel;
+    TextView operationPanel;
+
+    CalculatorCore coreCalc;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calculator_view);
+        componentsInitialization();
+        characterListenersInitialization();
+        operationPanel.setText("Stack:");
+
+    }
+
+
+    void componentsInitialization() {
+        button00= (Button) findViewById((R.id.button00));
+        button0 = (Button) findViewById(R.id.button0);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R.id.button5);
+        button6 = (Button) findViewById(R.id.button6);
+        button7 = (Button) findViewById(R.id.button7);
+        button8 = (Button) findViewById(R.id.button8);
+        button9 = (Button) findViewById(R.id.button9);
+        buttonPoint = (Button) findViewById(R.id.buttonPoint);
+
+        mainPanel = (EditText) findViewById(R.id.answerText);
+        operationPanel= (TextView) findViewById(R.id.operation);
+
+        buttonEquals = (Button) findViewById(R.id.buttonEquals);
+        buttonDel= (Button) findViewById(R.id.buttonDel);
+        buttonOK = (Button) findViewById(R.id.buttonOK);
+        buttonAc = (Button) findViewById(R.id.buttonAc);
+        buttonAdd = (Button) findViewById(R.id.buttonAdd);
+        buttonSubt = (Button) findViewById(R.id.buttonSubt);
+        buttonMult = (Button) findViewById(R.id.buttonMult);
+        buttonDiv = (Button) findViewById(R.id.buttonDiv);
+        buttonSign = (Button) findViewById(R.id.buttonSign);
+        buttonSin = (Button) findViewById(R.id.buttonSin);
+        buttonCos = (Button) findViewById(R.id.buttonCos);
+        buttonTan = (Button) findViewById(R.id.buttonTan);
+        buttonSqrt = (Button) findViewById(R.id.buttonSqrt);
+        buttonPow = (Button) findViewById(R.id.buttonPow);
+
+
+    }
+
+    void actionListenersInitialization(){
+        coreCalc=new CalculatorCore();
+
+        buttonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                okAction();
+            }
+        });
+
+        buttonDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String var = mainPanel.getEditableText() + "";
+                mainPanel.setText(var.substring(0,var.length()-1));
+            }
+        });
+
+        buttonAc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetAction();
+            }
+        });
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operationPanel.setText((String)operationPanel.getText()+" "+coreCalc.addFunction());
+            }
+        });
+
+        buttonSubt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                operationPanel.setText(operationPanel.getText()+" "+coreCalc.subtFunction());
+            }
+        });
+
+    }
+
+
+    void characterListenersInitialization(){
+        button00.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mainPanel.setText(mainPanel.getEditableText()+(String)"00");
+                                    }
+        });
+
+        button0.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText()+(String)"0");
+                                       }
+                                   }
+        );
+
+        button1.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() + (String)"1");
+                                       }
+                                   }
+        );
+
+        button2.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() +(String) "2");
+                                       }
+                                   }
+        );
+
+        button3.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() +(String) "3");
+                                       }
+                                   }
+        );
+
+        button4.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() +(String) "4");
+                                       }
+                                   }
+        );
+
+        button5.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() + (String)"5");
+                                       }
+                                   }
+        );
+
+        button6.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() +(String) "6");
+                                       }
+                                   }
+        );
+
+        button7.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() +(String) "7");
+                                       }
+                                   }
+        );
+        button8.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText()+(String) "8");
+                                       }
+                                   }
+        );
+        button9.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText()+ (String)"9");
+                                       }
+                                   }
+        );
+        buttonPoint.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+                                           mainPanel.setText(mainPanel.getEditableText() + (String)".");
+                                       }
+                                   }
+        );
+    }
+
+
+    void okAction() {
+
+        String var= mainPanel.getEditableText()+"";
+        try {
+            mainPanel.setText("");
+            float value= Float.parseFloat(var);
+            coreCalc.addStack(value);
+            operationPanel.setText((String)(operationPanel.getText()+" "+var));
+
+        }catch(Exception e) {
+            operationPanel.setText("SYNTAX ERROR");
+        }
+    }
+
+    void resetAction(){
+        coreCalc.reset();
+        operationPanel.setText(" ");
+        mainPanel.setText(" ");
+    }
+
+
+
+
+}
