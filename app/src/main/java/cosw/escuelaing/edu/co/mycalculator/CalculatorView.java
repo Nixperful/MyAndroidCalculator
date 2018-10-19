@@ -194,6 +194,22 @@ public class CalculatorView extends AppCompatActivity {
             }
         });
 
+        buttonSqrt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coreCalc.sqrtFunction();
+                self.refreshPanel();
+            }
+        });
+
+        buttonPow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coreCalc.powFunction();
+                self.refreshPanel();
+            }
+        });
+
 
     }
 
