@@ -2,6 +2,7 @@ package cosw.escuelaing.edu.co.mycalculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,15 +37,19 @@ public class CalculatorView extends AppCompatActivity {
 
     CalculatorCore coreCalc;
 
-
+    String resumeString;
+    Boolean isInError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator_view);
+        coreCalc=new CalculatorCore();
+        isInError=false;
         componentsInitialization();
         characterListenersInitialization();
+        actionListenersInitialization();
         operationPanel.setText("Stack:");
 
     }
@@ -86,7 +91,7 @@ public class CalculatorView extends AppCompatActivity {
     }
 
     void actionListenersInitialization(){
-        coreCalc=new CalculatorCore();
+
 
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +103,10 @@ public class CalculatorView extends AppCompatActivity {
         buttonDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String var = mainPanel.getEditableText() + "";
-                mainPanel.setText(var.substring(0,var.length()-1));
+                if (mainPanel.getEditableText().length()>0) {
+                    String var = mainPanel.getEditableText() + "";
+                    mainPanel.setText(var.substring(0, var.length() - 1));
+                }
             }
         });
 
@@ -109,11 +116,11 @@ public class CalculatorView extends AppCompatActivity {
                 resetAction();
             }
         });
-
+/*
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                operationPanel.setText((String)operationPanel.getText()+" "+coreCalc.addFunction());
+                operationPanel.setText(operationPanel.getText()+" "+coreCalc.addFunction());
             }
         });
 
@@ -123,7 +130,7 @@ public class CalculatorView extends AppCompatActivity {
                 operationPanel.setText(operationPanel.getText()+" "+coreCalc.subtFunction());
             }
         });
-
+*/
     }
 
 
@@ -226,20 +233,33 @@ public class CalculatorView extends AppCompatActivity {
 
         String var= mainPanel.getEditableText()+"";
         try {
+
             mainPanel.setText("");
             float value= Float.parseFloat(var);
-            coreCalc.addStack(value);
-            operationPanel.setText((String)(operationPanel.getText()+" "+var));
-
+            coreCalc.addStack((float)value);
+            if (isInError) {
+                operationPanel.setText((String) (resumeString + " " + value));
+            }
+            else{ operationPanel.setText((String) (operationPanel.getText() + " " + value));}
+            isInError=false;
         }catch(Exception e) {
-            operationPanel.setText("SYNTAX ERROR");
+            Log.e("YOLO",e.getMessage());
+            if (!isInError) {
+                resumeString=operationPanel.getText()+"";
+                isInError=true;
+                operationPanel.setText("SYNTAX ERROR");
+            }
+            else{
+                mainPanel.setText("");
+            }
+
         }
     }
 
     void resetAction(){
         coreCalc.reset();
-        operationPanel.setText(" ");
-        mainPanel.setText(" ");
+        operationPanel.setText("Stack:");
+        mainPanel.setText("");
     }
 
 

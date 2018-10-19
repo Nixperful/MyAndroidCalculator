@@ -1,26 +1,30 @@
 package cosw.escuelaing.edu.co.mycalculator;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CalculatorCore {
 
 
     float mainValue;
-    float [] stack;
+    List<Float> stack=new LinkedList<>();
 
     Operator optr;
 
-    void CalculatorCore(){
-        optr=new Operator();
-        stack=new float[]{};
+    public void CalculatorCore(){
+        this.optr=new Operator();
+        this.stack = new LinkedList<>();
+
     }
 
     void addStack(float number){
-        stack[stack.length]=number;
+        stack.add(number);
     }
 
     void reset(){
-        stack=new float[]{};
+        stack.clear();
     }
-
+/*
     float addFunction(){
         float val = optr.sum(stack[stack.length],stack[stack.length]-1);
         operationCompleted(val);
@@ -36,7 +40,7 @@ public class CalculatorCore {
         stack[stack.length]=stack[stack.length]+1;
         stack[stack.length]=val;
     }
-
+*/
 
 
 
